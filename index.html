@@ -17,27 +17,23 @@
         </div>
     </div>
 
-    <!-- LAYER 2: FIXED UI (Helm/Compass - ALWAYS VISIBLE NOW) -->
-    <!-- FIXED BOTTOM-CENTER COMPASS (Hidden initially) -->
+    <!-- LAYER 2: FIXED UI (Helm/Compass) -->
     <div id="compassWrapper" class="compass-wrapper hidden">
         <img src="/images/Timon.svg" id="compass" class="main-compass" alt="Brújula">
     </div>
 
-    <!-- ==========================================
-         LAYER 2.5: AUDIO PLAYER
-         ========================================== -->
+    <!-- LAYER 2.5: AUDIO PLAYER -->
     <audio id="ambientAudio" loop>
-        <!-- Replace with your actual file path -->
         <source src="./audio/Mar.mp3" type="audio/mpeg">
     </audio>
 
     <button id="audioToggle" class="audio-toggle-btn">
         <!-- Play Icon -->
-        <svg id="iconPlay" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="iconPlay" width="100px" height="100px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
-        <!-- Pause Icon (Hidden initially) -->
-        <svg id="iconPause" class="hidden" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Pause Icon -->
+        <svg id="iconPause" class="hidden" width="100px" height="100px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="6" y="4" width="4" height="16"></rect>
             <rect x="14" y="4" width="4" height="16"></rect>
         </svg>
@@ -62,25 +58,24 @@
     </section>
 
     <main id="narrative" class="narrative-section">
+        
+        <!-- HEADER WITH ROTATING IMAGE ON THE RIGHT -->
         <header class="brochure-header">
-            <h1 class="main-title">NAVEGANDO AL SON DE LA NEURODIVERSIDAD</h1>
-            <p class="main-subtitle">Cartilla pedagógica y didáctica de formación para 
-              la creación musical con enfoque diferencial.</p>
+            <div class="header-text-content">
+                <h1 class="main-title">NAVEGANDO AL SON DE LA NEURODIVERSIDAD</h1>
+                <p class="main-subtitle">Cartilla pedagógica y didáctica de formación para la creación musical con enfoque diferencial.</p>
+            </div>
+            <div class="header-image-container">
+                <!-- Replace src with your target image path (e.g. logo, symbol, or compass) -->
+                <img src="/images/brujula.svg" alt="Ilustración Header" class="rotating-header-img">
+            </div>
         </header>
 
         <section class="brochure-block">
             <div class="content-card">
                 <h2>Una oportunidad para la creación</h2>
-                <p>Este recurso didáctico integral, está diseñado
-                   para transformar la formación en música y artes 
-                   integradas con personas con discapacidad y/o trastornos,
-                    ampliando las posibilidades de acceso, participación y creación.</p>
-                <p>Es una herramienta que contribuye a transformar barreras,
-                   prejuicios y miedos en el aula, favoreciendo el ejercicio de 
-                   los derechos culturales mediante ajustes razonables, y múltiples 
-                   maneras de comunicación y expresión, como la Lengua de Señas 
-                   Colombiana (LSC), el uso de pictogramas, y la creación de canciones,
-                    cuentos y vídeos.</p>
+                <p>Este recurso didáctico integral, está diseñado para transformar la formación en música y artes integradas con personas con discapacidad y/o trastornos, ampliando las posibilidades de acceso, participación y creación.</p>
+                <p>Es una herramienta que contribuye a transformar barreras, prejuicios y miedos en el aula, favoreciendo el ejercicio de los derechos culturales mediante ajustes razonables, y múltiples maneras de comunicación y expresión, como la Lengua de Señas Colombiana (LSC), el uso de pictogramas, y la creación de canciones, cuentos y vídeos.</p>
             </div>
         </section>
 
@@ -89,38 +84,36 @@
             <div class="grid-enfoques">
                 <div class="enfoque-item">
                     <h3>Diálogo de saberes y creación:</h3>
-                    <p>Partimos del ser y del estar ahí, mediante procesos de 
-                      investigación-creación y el compartir entre seres humanos.</p>
+                    <p>Partimos del ser y del estar ahí, mediante procesos de investigación-creación y el compartir entre seres humanos.</p>
                 </div>
                 <div class="enfoque-item">
                     <h3>Identidad sonora y autonomía:</h3>
-                    <p>Preparamos para la proyección artística reconociendo múltiples 
-                      posibilidades expresivas, diversificando la agenda cultural.</p>
+                    <p>Preparamos para la proyección artística reconociendo múltiples posibilidades expresivas, diversificando la agenda cultural.</p>
                 </div>
                 <div class="enfoque-item">
                     <h3>Dignidad y empatía:</h3>
-                    <p>Reconocemos a cada persona como un artista capaz de crear y 
-                      producir arte con calidad estética, desde diversas formas de 
-                      participación.</p>
+                    <p>Reconocemos a cada persona como un artista capaz de crear y producir arte con calidad estética, desde diversas formas de participación.</p>
                 </div>
                 <div class="enfoque-item">
                     <h3>Creación colectiva:</h3>
-                    <p>Orientamos el viaje a trabajar en equipo fomentando el ensamble 
-                      musical de melodía, percusión, voz y otras formas de expresión.</p>
+                    <p>Orientamos el viaje a trabajar en equipo fomentando el ensamble musical de melodía, percusión, voz y otras formas de expresión.</p>
                 </div>
             </div>
         </section>
 
         <section class="brochure-block ports-section">
-            <h2>La ruta</h2>
-            <p class="route-intro">La navegación propone el aprendizaje musical como una 
-              experiencia orgánica que parte del cuerpo como primer territorio para sentir,
-              explorar y comprender la música.Desde allí, la teoría, la práctica y la 
-              creación se encuentran y se desarrollan de acuerdo con las posibilidades, 
-              intereses y contextos de cada persona. La cartilla se organiza en tres 
-              capítulos que acompañan esta travesía:</p>
+            <div class="section-flex-header">
+                <div class="section-title-wrapper">
+                    <h2>La ruta</h2>
+                </div>
+                <div class="section-image-container">
+                    <!-- Replace with your desired image path -->
+                    <img src="/images/Barco.svg" alt="Ilustración Ruta" class="rotating-section-img">
+                </div>
+            </div>
+            <p class="route-intro">La navegación propone el aprendizaje musical como una experiencia orgánica que parte del cuerpo como primer territorio para sentir, explorar y comprender la música. Desde allí, la teoría, la práctica y la creación se encuentran y se desarrollan de acuerdo con las posibilidades, intereses y contextos de cada persona. La cartilla se organiza en tres capítulos que acompañan esta travesía:</p>
 
-              <div class="ports-grid">
+            <div class="ports-grid">
                 <div class="port-card">
                     <span class="port-num">Capítulo I</span>
                     <h3>Alistando la embarcación</h3> 
@@ -133,30 +126,43 @@
                     <span class="port-num">Capítulo III</span>
                     <h3>Herramientas para la travesía</h3>
                 </div>
-
-            
-            
-        </section>
-
-        <section class="brochure-block credits-section">
-            <div class="content-card">
-                <h2>¿A quién va dirigido?</h2>
-                <p>La cartilla y sus tesoros son un regalo para artistas, docentes, 
-                  formadores, investigadores e interesados en procesos de formación musical
-                   con personas con discapacidad y/o trastornos a partir de los 7 años
-                    cumplidos.</p>
-                <div class="author-info">
-                    <p><strong>Investigadora y artista formadora:</strong> 
-                      Margarita Maria Granada Ruiz</p>
-                    <p><code>mandragoramm@gmail.com</code></p>
-                </div>
             </div>
         </section>
 
-        <section class="brochure-block ports-section">
-            <h2>Los cinco puertos: Una travesía musical</h2>
+        <section class="brochure-block credits-section">
+    <div class="content-card big-images-card">
+        <!-- Left Big Image -->
+        <div class="card-side-img left-img">
+            <img src="/images/Ilustracion.svg" alt="Ilustración Izquierda">
+        </div>
 
-            
+        <!-- Central Text Content (Justified) -->
+        <div class="card-text-content">
+            <h2>¿A quién va dirigido?</h2>
+            <p>La cartilla y sus tesoros son un regalo para artistas, docentes, formadores, investigadores e interesados en procesos de formación musical con personas con discapacidad y/o trastornos a partir de los 7 años cumplidos.</p>
+            <div class="author-info">
+                <p><strong>Investigadora y artista formadora:</strong> Margarita Maria Granada Ruiz</p>
+                <p><code>mandragoramm@gmail.com</code></p>
+            </div>
+        </div>
+
+        <!-- Right Big Image -->
+        <div class="card-side-img right-img">
+            <img src="/images/Tesoro.svg" alt="Ilustración Derecha">
+        </div>
+    </div>
+</section>
+
+        <section class="brochure-block ports-section">
+            <div class="section-flex-header">
+                <div class="section-title-wrapper">
+                    <h2>Los cinco puertos: una travesía musical</h2>
+                </div>
+                <div class="section-image-container">
+                    <!-- Replace with your desired image path -->
+                    <img src="/images/Barco2.svg" alt="Ilustración Ruta" class="rotating-section-img">
+                </div>
+            </div>
             <div class="ports-grid">
                 <div class="port-card">
                     <span class="port-num">Puerto I</span>
@@ -183,6 +189,21 @@
                     <h3>Crear</h3>
                     <p>Integra todo en una creación colectiva.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- FINAL BIG IMAGE SECTION -->
+        <section class="brochure-block final-image-section">
+            <div class="final-image-container">
+                <!-- Replace with your final image path -->
+                <img src="/images/Simbolo.svg" alt="Imagen Final" class="final-big-img">
+            </div>
+            <div class="final-text-content">
+                <p>Esta cartilla convierte las experiencias de una
+                  artista formadora con personas con
+                  discapacidad y/o trastornos, en un modelo
+                  transferible para inspirar a otros seres humanos
+                  a sentir, fluir y gozar a través de la música.</p>
             </div>
         </section>
     </main>

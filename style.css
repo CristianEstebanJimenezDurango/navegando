@@ -1,6 +1,5 @@
 /* =========================================
    1. COLOR PALETTE & VARIABLES
-   Change these hex codes to adjust the entire site's theme.
    ========================================= */
 :root {
     --blue-light: #649cc8;
@@ -9,19 +8,36 @@
     --cream-base: #f1ee99;
     --orange-accent: #d37e3d;
 }
+/* =========================================
+   1. CUSTOM FONT REGISTRATION (Bebas Neue)
+   ========================================= */
+@font-face {
+    font-family: 'Bebas Neue';
+    /* Update this path to match where your .ttf file is saved */
+    src: url('./fonts/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
-/* Base Body Styles */
+/* =========================================
+   APPLY THE FONT
+   ========================================= */
+/* Example: Apply it to all your main titles or headers */
+.main-title, h1, h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1.5px; /* Bebas Neue looks great with a bit of letter spacing */
+}
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    background-color: var(--blue-light); 
+    background-color: transparent;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--blue-dark);
     overflow-x: hidden;
 }
 
-/* Utility to hide elements before JS reveals them */
 .hidden {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -35,26 +51,23 @@ html, body {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    z-index: 0; /* Keeps it behind all content */
-    pointer-events: none; /* Allows scrolling through it */
+    z-index: 0;
+    pointer-events: none;
     overflow: hidden;
 }
 
-/* The ambient 5-second loop video container */
 .bg-video-container {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     z-index: 1;
-    /* Adjust opacity (0.0 to 1.0) to make the video more or less visible behind text.
-       Since body is --blue-light, a lower opacity tints the video blue. */
-    opacity: 0.35; 
+    opacity: 0.85; 
 }
 
 #bgOutroVideo {
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: saturate(0.8) brightness(1.1); /* Tweaks video colors to blend better */
+    filter: saturate(0.8) brightness(1.1); 
 }
 
 /* =========================================
@@ -62,22 +75,23 @@ html, body {
    ========================================= */
 .compass-wrapper {
     position: fixed;
-    bottom: -50px; left: 50%;
-    transform: translate(-50%, 50%); /* Pushes exactly half of it off the bottom of the screen */
-    width: 100vw; /* Scales relative to viewport width */
-    max-width: 520px; /* Won't get bigger than this on desktop */
-    min-width: 280px; /* Won't get smaller than this on mobile */
+    bottom: -200px; left: 50%;
+    transform: translate(-50%, 50%); 
+    width: 100vw; 
+    max-width: 520px; 
+    min-width: 280px; 
     display: flex;
     align-items: center; justify-content: center;
     transition: opacity 0.8s ease, visibility 0.8s ease, transform 0.5s ease;
-    z-index: 10; /* Sits above narrative text */
+    z-index: 10; 
     pointer-events: none;
 }
 
 .main-compass {
     width: 100%; height: auto;
+    transform: scale(1.5);
     filter: drop-shadow(0 0 20px rgba(46, 92, 149, 0.4));
-    will-change: transform; /* Optimizes rotation performance */
+    will-change: transform; 
 }
 
 /* =========================================
@@ -91,7 +105,7 @@ html, body {
 }
 
 .intro-section { z-index: 2; }
-.outro-section { z-index: 12; background-color: #000; } /* Sits above everything at the very end */
+.outro-section { z-index: 12; background-color: #000; opacity: 0 } 
 
 .video-container {
     position: absolute;
@@ -104,10 +118,9 @@ html, body {
 #introVideo, #outroVideo {
     width: 100%; height: 100%;
     object-fit: cover; 
-    filter: brightness(0.85); /* Darkens video slightly so text/UI stands out */
+    filter: brightness(0.85); 
 }
 
-/* Scrolling Arrow Indicator */
 .ui-layer {
     position: absolute;
     top: 0; left: 0;
@@ -128,33 +141,74 @@ html, body {
 }
 
 /* =========================================
-   5. NARRATIVE CONTENT STYLES
+   5. NARRATIVE CONTENT STYLES & HEADER LAYOUT
    ========================================= */
 .narrative-section {
     position: relative;
     min-height: 200vh;
     z-index: 3;
     padding: 100px 20px 250px 20px;
-    max-width: 1000px; /* Keeps text readable on ultra-wide screens */
+    max-width: 1000px; 
     margin: 0 auto;
 }
 
-/* Typography */
-.brochure-header { text-align: center; margin-bottom: 80px; }
-.main-title { font-size: 2.8rem; color: var(--blue-dark); margin-bottom: 15px; text-shadow: 0 2px 10px rgba(241, 238, 153, 0.8); }
-.main-subtitle { font-size: 1.3rem; color: var(--orange-accent); font-weight: 600; }
+/* Header Flexbox Layout (Text left, Rotating Image right) */
+.brochure-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 80px;
+    text-align: left;
+}
+
+.header-text-content {
+    flex: 1;
+}
+
+.header-image-container {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================
+   ROTATING HEADER IMAGE (Pendulum Swing Animation)
+   ========================================= */
+.rotating-header-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 10px rgba(46, 92, 149, 0.3));
+    /* Rotates between 60deg left (-60deg) and 30deg right (30deg) over 6 seconds */
+    animation: pendulumRotate 6s ease-in-out infinite alternate;
+}
+
+@keyframes pendulumRotate {
+    0% {
+        transform: rotate(-30deg); /* 60 degrees to the left */
+    }
+    100% {
+        transform: rotate(30deg);  /* 30 degrees to the right */
+    }
+}
+
+.main-title { font-size: 6rem; color: var(--blue-dark); margin-bottom: 15px; text-shadow: 0 2px 10px rgba(241, 238, 153, 0.8); }
+.main-subtitle { font-size: 3rem; color: var(--orange-accent); font-weight: 600; }
 
 /* Blocks */
 .brochure-block {
     margin-bottom: 60px;
-    opacity: 0; /* Hidden initially for GSAP scroll reveal */
+    opacity: 0; 
     transform: translateY(40px);
 }
-.brochure-block h2 { font-size: 2rem; color: var(--blue-dark); margin-bottom: 25px; text-align: center; }
+.brochure-block h2 { font-size: 4rem; color: var(--blue-dark); margin-bottom: 25px; text-align: center; }
 
 /* Glassmorphism Text Cards */
 .content-card {
-    background: rgba(255, 255, 255, 0.85); /* Frost glass transparency */
+    background: rgba(255, 255, 255, 0.2); 
     padding: 40px;
     border-radius: 20px;
     border: 2px solid var(--blue-light);
@@ -165,20 +219,25 @@ html, body {
 
 /* Grid Layouts */
 .grid-enfoques { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-.enfoque-item { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid var(--orange-accent); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.enfoque-item h3 { color: var(--blue-dark); font-size: 1.2rem; margin-top: 0; }
+.enfoque-item { background: rgba(255, 255, 255, 0.2); padding: 25px; border-radius: 15px; border-top: 5px solid var(--orange-accent); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.enfoque-item h3 { color: var(--blue-dark); font-size: 2rem; margin-top: 0; }
 
 .ports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
-.port-card { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 12px; text-align: center; border-bottom: 4px solid var(--yellow-warm); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.port-card { background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 12px; text-align: center; border-bottom: 4px solid var(--yellow-warm); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 .highlight-port { border-bottom-color: var(--orange-accent); background: rgba(235, 196, 71, 0.2); }
 .port-num { display: block; font-size: 0.85rem; font-weight: bold; color: var(--orange-accent); text-transform: uppercase; margin-bottom: 5px; }
 
-/* Mobile Adjustments */
+/* Mobile Adjustments: Stacks the header items vertically on small screens */
 @media (max-width: 768px) {
-    .main-title { font-size: 1.8rem; }
-    .main-subtitle { font-size: 1rem; }
+    .brochure-header {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .main-title { font-size: 5rem; }
+    .main-subtitle { font-size: 2.5rem; }
     .content-card { padding: 20px; font-size: 1rem; }
     .compass-wrapper { width: 75vw; }
+    .header-image-container { width: 100px; height: 100px; margin-bottom: 15px; }
 }
 
 /* =========================================
@@ -188,11 +247,11 @@ html, body {
     position: fixed;
     top: 30px;
     right: 30px;
-    z-index: 50; /* Keeps it above everything */
+    z-index: 50; 
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid var(--blue-light);
     color: var(--blue-dark);
     display: flex;
@@ -209,10 +268,235 @@ html, body {
     background: white;
 }
 
-/* Ensure the SVG icons sit perfectly inside the button */
 .audio-toggle-btn svg {
     width: 20px;
     height: 20px;
     position: absolute;
     transition: opacity 0.3s ease;
+}
+
+/* =========================================
+   SECTION FLEX HEADER (For "La ruta" and similar headers)
+   ========================================= */
+.section-flex-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Pushes the title left and the image to the far right */
+    gap: 150px;
+    margin-bottom: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.section-title-wrapper h2 {
+    margin: 0;
+}
+
+.section-image-container {
+    flex-shrink: 0;
+    width: 40%; /* Increased size (was 90px) */
+    height: auto; /* Increased size (was 90px) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rotating-section-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 3px 8px rgba(46, 92, 149, 0.25));
+    animation: pendulumRotate 6s ease-in-out infinite alternate;
+}
+
+/* Responsive: Places the image ABOVE the h2 on mobile screens */
+@media (max-width: 768px) {
+    .section-flex-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section-image-container {
+        order: 0; /* Puts image above */
+        width: 50%; /* Larger scale for mobile */
+        height: auto; /* Maintains aspect ratio */
+        margin: 0 auto 10px auto;
+    }
+
+    .section-title-wrapper {
+        order: 1; /* Puts title below the image */
+    }
+}
+
+/* =========================================
+   BIG IMAGES CONTENT CARD LAYOUT
+   ========================================= */
+.big-images-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Side image containers controlling the "very big" sizing */
+.card-side-img {
+    flex-shrink: 0;
+    width: 280px; /* Adjust this value to make them bigger or smaller */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-side-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(46, 92, 149, 0.25));
+}
+
+/* Central text container with justified alignment */
+.card-text-content {
+    flex: 1;
+    text-align: justify; /* Justifies the text in between */
+}
+
+.card-text-content h2 {
+    text-align: center; /* Keeps the heading centered for visual balance */
+}
+
+/* Responsive: Stacks images above and below text on smaller screens */
+@media (max-width: 900px) {
+    .big-images-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card-text-content {
+        text-align: center; /* Reverts justification on mobile for better readability */
+    }
+
+    .card-side-img {
+        width: 160px; /* Scales down slightly for mobile layout */
+        margin: 10px 0;
+    }
+}
+
+/* =========================================
+   SIDE IMAGES ANIMATIONS (Left Fade & Right Float)
+   ========================================= */
+
+/* Left Image: Slow fade-in and fade-out loop */
+.big-images-card .left-img img {
+    animation: slowFade 6s ease-in-out infinite alternate;
+}
+
+@keyframes slowFade {
+    0% {
+        opacity: 0; /* Fades out smoothly */
+    }
+    100% {
+        opacity: 1;   /* Fully appears */
+    }
+}
+
+/* Right Image: Continuous up and down floating motion */
+.big-images-card .right-img img {
+    animation: floatUpDown 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatUpDown {
+    0% {
+        transform: translateY(0px); /* Original position */
+    }
+    100% {
+        transform: translateY(-45px); /* Moves 15px upwards */
+    }
+}
+
+/* =========================================
+   FINAL BIG IMAGE SECTION LAYOUT
+   ========================================= */
+.final-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.final-image-container {
+    width: 100%;
+    max-width: 600px; /* Controls how "very big" the image can get on desktop */
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.final-big-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 25px rgba(46, 92, 149, 0.35));
+}
+
+.final-text-content {
+    max-width: 700px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 25px 35px;
+    border-radius: 15px;
+    border: 2px solid var(--blue-light);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(46, 92, 149, 0.1);
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
+    .final-image-container {
+        max-width: 85vw; /* Scales cleanly to fit mobile screen widths */
+    }
+    .final-text-content {
+        padding: 20px;
+        font-size: 1rem;
+    }
+}
+/* =========================================
+   RESPONSIVE ADJUSTMENTS FOR HEADER
+   ========================================= */
+@media (max-width: 768px) {
+    .brochure-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    /* Forces the image container to appear between title and subtitle */
+    .header-image-container { 
+        order: 1; 
+        width: 120px; 
+        height: 120px; 
+        margin: 15px auto; /* Centers the image horizontally */
+    }
+
+    .header-text-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Keeps main title at the very top */
+    .main-title { 
+        order: 0; 
+        font-size: 4rem;
+        padding: 20px 20px; 
+    }
+
+    /* Pushes subtitle below the image */
+    .main-subtitle { 
+        order: 2; 
+        font-size: 2rem;
+        padding: 20px 20px; 
+    }
+
+    .content-card { padding: 20px; font-size: 1rem; }
+    .compass-wrapper { width: 75vw; }
 }

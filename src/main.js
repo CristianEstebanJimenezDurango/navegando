@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Continuously rotates Timon.svg based on scroll progress across the site
     gsap.to("#compass", {
         rotation: 720,
+        
         ease: "none",
         scrollTrigger: {
             trigger: "body",
@@ -147,18 +148,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================================================================
-       6. OUTRO VIDEO SEQUENCE
+       6. OUTRO VIDEO SEQUENCE (Reversed mirror of the Intro transition)
        ========================================================================= */
-    ScrollTrigger.create({
-        trigger: "#outro",
-        start: "top 70%",
-        onEnter: () => {
-            outroElement.currentTime = 0;
-            outroElement.play().catch(() => {});
-        },
-        onEnterBack: () => outroElement.play().catch(() => {}),
-        onLeaveBack: () => outroElement.pause()
-    });
+    gsap.fromTo("#outro", 
+        { opacity: 0 }, 
+        {
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#outro",
+                start: "top top",
+                end: "+=100%", // Pins for 100% scroll height, exactly like the intro
+                pin: true,
+                scrub: true,
+                onEnter: () => {
+                    outroElement.currentTime = 0;
+                    outroElement.play().catch(() => {});
+                },
+                onEnterBack: () => {
+                    outroElement.play().catch(() => {});
+                }
+            }
+        }
+    );
 });
 
 /* =========================================================================
