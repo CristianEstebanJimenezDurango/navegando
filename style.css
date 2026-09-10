@@ -1,0 +1,258 @@
+/* =========================================
+   COLOR PALETTE & CSS VARIABLES
+   ========================================= */
+:root {
+    --blue-light: #649cc8;
+    --blue-dark: #2e5c95;
+    --yellow-warm: #ebc447;
+    --cream-base: #f1ee99;
+    --orange-accent: #d37e3d;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    background-color: var(--cream-base);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--blue-dark);
+    overflow-x: hidden;
+}
+
+.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* =========================================
+   FIXED ANIMATED BACKGROUND SVG
+   ========================================= */
+.bg-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bg-wrapper svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================
+   FIXED BOTTOM-CENTER COMPASS
+   ========================================= */
+.compass-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 45vw;
+    max-width: 520px;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.main-compass {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(46, 92, 149, 0.4));
+    will-change: transform;
+}
+
+/* =========================================
+   INTRO SECTION
+   ========================================= */
+.intro-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#introVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    filter: brightness(0.7); 
+}
+
+.ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.scroll-arrow {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 11;
+    animation: tiltBounce 2s infinite ease-in-out;
+    filter: drop-shadow(0 2px 6px rgba(46, 92, 149, 0.3));
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+@keyframes tiltBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(12px) rotate(8deg); }
+}
+
+/* =========================================
+   BROCHURE NARRATIVE SECTION
+   ========================================= */
+.narrative-section {
+    position: relative;
+    min-height: 200vh;
+    z-index: 3;
+    padding: 100px 20px 250px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.brochure-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.main-title {
+    font-size: 2.8rem;
+    color: var(--blue-dark);
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(241, 238, 153, 0.8);
+}
+
+.main-subtitle {
+    font-size: 1.3rem;
+    color: var(--orange-accent);
+    font-weight: 600;
+}
+
+.brochure-block {
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.brochure-block h2 {
+    font-size: 2rem;
+    color: var(--blue-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.content-card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--blue-light);
+    box-shadow: 0 10px 30px rgba(46, 92, 149, 0.1);
+    backdrop-filter: blur(10px);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Enfoques Grid */
+.grid-enfoques {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.enfoque-item {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 5px solid var(--orange-accent);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.enfoque-item h3 {
+    color: var(--blue-dark);
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+
+/* Ports Section */
+.route-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+.ports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.port-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border-bottom: 4px solid var(--yellow-warm);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.highlight-port {
+    border-bottom-color: var(--orange-accent);
+    background: rgba(235, 196, 71, 0.2);
+}
+
+.port-num {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--orange-accent);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.port-card h3 {
+    margin: 5px 0 10px 0;
+    color: var(--blue-dark);
+}
+
+/* Credits Section */
+.author-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--blue-light);
+}
+
+.stimulus-note {
+    font-style: italic;
+    color: var(--orange-accent);
+    font-weight: 500;
+    margin-top: 10px;
+}
