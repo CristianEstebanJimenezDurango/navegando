@@ -8,45 +8,46 @@
 </head>
 <body>
 
-    <!-- FIXED ANIMATED SVG BACKGROUND (Sea & Clouds) -->
+    <!-- LAYER 1: FIXED BACKGROUND (Video Only) -->
     <div id="bgWrapper" class="bg-wrapper">
-        <svg id="skySeaBg" viewBox="0 0 1000 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#f1ee99"/>
-                    <stop offset="100%" stop-color="#649cc8"/>
-                </linearGradient>
-            </defs>
-            <!-- Sky Base -->
-            <rect width="1000" height="1200" fill="url(#skyGrad)"/>
-
-            <!-- Animated Clouds Group -->
-            <g id="cloudsGroup" fill="#ffffff" opacity="0.85">
-                <path class="cloud cloud-1" d="M100 300 Q120 280 150 280 Q180 280 200 300 Q220 300 230 320 Q230 340 200 340 L100 340 Z"/>
-                <path class="cloud cloud-2" d="M450 450 Q470 430 500 430 Q530 430 550 450 Q570 450 580 470 L420 470 Z"/>
-                <path class="cloud cloud-3" d="M500 600 Q520 580 550 580 Q580 580 600 600 L480 600 Z"/>
-                <path class="cloud cloud-horizon" d="M200 1000 Q300 850 450 920 Q600 800 800 950 Q900 920 1000 1000 L1000 1200 L0 1200 Z" opacity="0.95"/>
-            </g>
-
-            <!-- Animated Sea Waves Group -->
-            <g id="seaGroup">
-                <path id="waveBack" d="M-100 1020 Q 150 1000, 400 1020 T 900 1020 T 1400 1020 L 1400 1200 L -100 1200 Z" fill="#2e5c95" opacity="0.6"/>
-                <path id="waveMid" d="M-100 1040 Q 200 1060, 500 1040 T 1000 1040 T 1500 1040 L 1500 1200 L -100 1200 Z" fill="#649cc8" opacity="0.85"/>
-                <path id="waveFront" d="M-100 1070 Q 150 1050, 450 1070 T 950 1070 T 1450 1070 L 1450 1200 L -100 1200 Z" fill="#ebc447" opacity="0.4"/>
-            </g>
-        </svg>
+        <div class="bg-video-container">
+            <video id="bgOutroVideo" autoplay muted playsinline webkit-playsinline>
+                <source id="bgOutroVideoSource" src="./video/Cabezote_Final_Leyenda/Final_Leyenda_Navegando_1920_1080.mp4" type="video/mp4">
+            </video>
+        </div>
     </div>
 
-    <!-- FIXED BOTTOM-CENTER COMPASS (Stays visible across all sections) -->
+    <!-- LAYER 2: FIXED UI (Helm/Compass - ALWAYS VISIBLE NOW) -->
+    <!-- FIXED BOTTOM-CENTER COMPASS (Hidden initially) -->
     <div id="compassWrapper" class="compass-wrapper hidden">
         <img src="/images/Timon.svg" id="compass" class="main-compass" alt="Brújula">
     </div>
 
-    <!-- INTRO SECTION -->
+    <!-- ==========================================
+         LAYER 2.5: AUDIO PLAYER
+         ========================================== -->
+    <audio id="ambientAudio" loop>
+        <!-- Replace with your actual file path -->
+        <source src="./audio/Mar.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="audioToggle" class="audio-toggle-btn">
+        <!-- Play Icon -->
+        <svg id="iconPlay" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <!-- Pause Icon (Hidden initially) -->
+        <svg id="iconPause" class="hidden" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+    </button>
+
+    <!-- LAYER 3: SCROLLABLE SECTIONS -->
     <section id="intro" class="intro-section">
         <div class="video-container">
-            <video id="introVideo" autoplay muted playsinline>
-                <source id="introVideoSource" src="/video/Cabezote_de_Inicio/Cabezote_Inicio_1920_1080.mp4" type="video/mp4"> 
+            <video id="introVideo" autoplay muted playsinline webkit-playsinline>
+                <source id="introVideoSource" src="./video/Cabezote_de_Inicio/Cabezote_Inicio_1920_1080.mp4" type="video/mp4"> 
                 Tu navegador no soporta videos HTML5.
             </video>
         </div>
@@ -60,95 +61,140 @@
         </div>
     </section>
 
-    <!-- MAIN BROCHURE NARRATIVE CONTENT -->
     <main id="narrative" class="narrative-section">
-        
-        <!-- Header / Hero Title -->
         <header class="brochure-header">
             <h1 class="main-title">NAVEGANDO AL SON DE LA NEURODIVERSIDAD</h1>
-            <p class="main-subtitle">Cartilla pedagógica y didáctica de formación para la creación musical con enfoque diferencial[cite: 2].</p>
+            <p class="main-subtitle">Cartilla pedagógica y didáctica de formación para 
+              la creación musical con enfoque diferencial.</p>
         </header>
 
-        <!-- Chapter I: Una oportunidad para la creación -->
         <section class="brochure-block">
             <div class="content-card">
                 <h2>Una oportunidad para la creación</h2>
-                <p>Este recurso didáctico integral, está diseñado para transformar la formación en música y artes integradas con personas con discapacidad y/o trastornos, ampliando las posibilidades de acceso, participación y creación[cite: 2].</p>
-                <p>Es una herramienta que contribuye a transformar barreras, prejuicios y miedos en el aula, favoreciendo el ejercicio de los derechos culturales mediante ajustes razonables, y múltiples maneras de comunicación y expresión, como la Lengua de Señas Colombiana (LSC), el uso de pictogramas, y la creación de canciones, cuentos y vídeos[cite: 2].</p>
+                <p>Este recurso didáctico integral, está diseñado
+                   para transformar la formación en música y artes 
+                   integradas con personas con discapacidad y/o trastornos,
+                    ampliando las posibilidades de acceso, participación y creación.</p>
+                <p>Es una herramienta que contribuye a transformar barreras,
+                   prejuicios y miedos en el aula, favoreciendo el ejercicio de 
+                   los derechos culturales mediante ajustes razonables, y múltiples 
+                   maneras de comunicación y expresión, como la Lengua de Señas 
+                   Colombiana (LSC), el uso de pictogramas, y la creación de canciones,
+                    cuentos y vídeos.</p>
             </div>
         </section>
 
-        <!-- Enfoques / Diálogo de saberes -->
         <section class="brochure-block">
-            <h2>Enfoques: Diálogo de saberes y creación</h2>
+            <h2>Enfoques:</h2>
             <div class="grid-enfoques">
                 <div class="enfoque-item">
-                    <h3>Diálogo de saberes y creación</h3>
-                    <p>Partimos del ser y del estar ahí, mediante procesos de investigación-creación y el compartir entre seres humanos[cite: 2].</p>
+                    <h3>Diálogo de saberes y creación:</h3>
+                    <p>Partimos del ser y del estar ahí, mediante procesos de 
+                      investigación-creación y el compartir entre seres humanos.</p>
                 </div>
                 <div class="enfoque-item">
-                    <h3>Identidad sonora y autonomía</h3>
-                    <p>Preparamos para la proyección artística reconociendo múltiples posibilidades expresivas, diversificando la agenda cultural[cite: 2].</p>
+                    <h3>Identidad sonora y autonomía:</h3>
+                    <p>Preparamos para la proyección artística reconociendo múltiples 
+                      posibilidades expresivas, diversificando la agenda cultural.</p>
                 </div>
                 <div class="enfoque-item">
-                    <h3>Dignidad y empatía</h3>
-                    <p>Reconocemos a cada persona como un artista capaz de crear y producir arte con calidad estética, desde diversas formas de participación[cite: 2].</p>
+                    <h3>Dignidad y empatía:</h3>
+                    <p>Reconocemos a cada persona como un artista capaz de crear y 
+                      producir arte con calidad estética, desde diversas formas de 
+                      participación.</p>
                 </div>
                 <div class="enfoque-item">
-                    <h3>Creación colectiva</h3>
-                    <p>Orientamos el viaje a trabajar en equipo fomentando el ensamble musical de melodía, percusión, voz y otras formas de expresión[cite: 2].</p>
+                    <h3>Creación colectiva:</h3>
+                    <p>Orientamos el viaje a trabajar en equipo fomentando el ensamble 
+                      musical de melodía, percusión, voz y otras formas de expresión.</p>
                 </div>
             </div>
         </section>
 
-        <!-- La Ruta & The 5 Ports -->
         <section class="brochure-block ports-section">
-            <h2>La ruta y Los cinco puertos: Una travesía musical</h2>
-            <p class="route-intro">La navegación propone el aprendizaje musical como una experiencia orgánica que parte del cuerpo como primer territorio para sentir, explorar y comprender la música[cite: 2].</p>
+            <h2>La ruta</h2>
+            <p class="route-intro">La navegación propone el aprendizaje musical como una 
+              experiencia orgánica que parte del cuerpo como primer territorio para sentir,
+              explorar y comprender la música.Desde allí, la teoría, la práctica y la 
+              creación se encuentran y se desarrollan de acuerdo con las posibilidades, 
+              intereses y contextos de cada persona. La cartilla se organiza en tres 
+              capítulos que acompañan esta travesía:</p>
+
+              <div class="ports-grid">
+                <div class="port-card">
+                    <span class="port-num">Capítulo I</span>
+                    <h3>Alistando la embarcación</h3> 
+                </div>
+                <div class="port-card">
+                    <span class="port-num">Capítulo II</span>
+                    <h3>La ruta de los puertos</h3>  
+                </div>
+                <div class="port-card">
+                    <span class="port-num">Capítulo III</span>
+                    <h3>Herramientas para la travesía</h3>
+                </div>
+
+            
+            
+        </section>
+
+        <section class="brochure-block credits-section">
+            <div class="content-card">
+                <h2>¿A quién va dirigido?</h2>
+                <p>La cartilla y sus tesoros son un regalo para artistas, docentes, 
+                  formadores, investigadores e interesados en procesos de formación musical
+                   con personas con discapacidad y/o trastornos a partir de los 7 años
+                    cumplidos.</p>
+                <div class="author-info">
+                    <p><strong>Investigadora y artista formadora:</strong> 
+                      Margarita Maria Granada Ruiz</p>
+                    <p><code>mandragoramm@gmail.com</code></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="brochure-block ports-section">
+            <h2>Los cinco puertos: Una travesía musical</h2>
+
             
             <div class="ports-grid">
                 <div class="port-card">
                     <span class="port-num">Puerto I</span>
                     <h3>Vivir</h3>
-                    <p>Construye la disposición[cite: 2].</p>
+                    <p>Construye la disposición.</p>
                 </div>
                 <div class="port-card">
                     <span class="port-num">Puerto II</span>
                     <h3>Sentir</h3>
-                    <p>Descubre el sonido[cite: 2].</p>
+                    <p>Descubre el sonido.</p>
                 </div>
                 <div class="port-card">
                     <span class="port-num">Puerto III</span>
                     <h3>Organizar</h3>
-                    <p>Hace habitar la estructura temporal[cite: 2].</p>
+                    <p>Hace habitar la estructura temporal.</p>
                 </div>
                 <div class="port-card">
                     <span class="port-num">Puerto IV</span>
                     <h3>Representar</h3>
-                    <p>Da lenguaje a todo lo vivido[cite: 2].</p>
+                    <p>Da lenguaje a todo lo vivido.</p>
                 </div>
-                <div class="port-card highlight-port">
+                <div class="port-card">
                     <span class="port-num">Puerto V</span>
                     <h3>Crear</h3>
-                    <p>Integra todo en una creación colectiva[cite: 2].</p>
+                    <p>Integra todo en una creación colectiva.</p>
                 </div>
             </div>
         </section>
-
-        <!-- Target Audience & Credits -->
-        <section class="brochure-block credits-section">
-            <div class="content-card">
-                <h2>¿A quién va dirigido?</h2>
-                <p>La cartilla y sus tesoros son un regalo para artistas, docentes, formadores, investigadores e interesados en procesos de formación musical con personas con discapacidad y/o trastornos a partir de los 7 años cumplidos[cite: 2].</p>
-                <div class="author-info">
-                    <p><strong>Investigadora y artista formadora:</strong> Margarita Maria Granada Ruiz[cite: 2]</p>
-                    <p><code>mandragoramm@gmail.com</code>[cite: 2]</p>
-                    <p class="stimulus-note">Proyecto ganador de la beca para la creación de materiales pedagógicos del Programa Nacional de Estímulos 2026[cite: 2].</p>
-                </div>
-            </div>
-        </section>
-
     </main>
+
+    <section id="outro" class="outro-section">
+        <div class="video-container">
+            <video id="outroVideo" autoplay muted playsinline webkit-playsinline loop>
+                <source id="outroVideoSource" src="./video/Cabezote_Final_Leyenda/Final_Leyenda_Navegando_1920_1080.mp4" type="video/mp4"> 
+                Tu navegador no soporta videos HTML5.
+            </video>
+        </div>
+    </section>
 
     <script type="module" src="./src/main.js"></script>
 </body>

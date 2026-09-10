@@ -1,5 +1,6 @@
 /* =========================================
-   COLOR PALETTE & CSS VARIABLES
+   1. COLOR PALETTE & VARIABLES
+   Change these hex codes to adjust the entire site's theme.
    ========================================= */
 :root {
     --blue-light: #649cc8;
@@ -9,16 +10,18 @@
     --orange-accent: #d37e3d;
 }
 
+/* Base Body Styles */
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    background-color: var(--cream-base);
+    background-color: var(--blue-light); 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--blue-dark);
     overflow-x: hidden;
 }
 
+/* Utility to hide elements before JS reveals them */
 .hidden {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -26,233 +29,190 @@ html, body {
 }
 
 /* =========================================
-   FIXED ANIMATED BACKGROUND SVG
+   2. FIXED BACKGROUND (Video Only)
    ========================================= */
 .bg-wrapper {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0; /* Keeps it behind all content */
+    pointer-events: none; /* Allows scrolling through it */
     overflow: hidden;
 }
 
-.bg-wrapper svg {
-    width: 100%;
-    height: 100%;
+/* The ambient 5-second loop video container */
+.bg-video-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    /* Adjust opacity (0.0 to 1.0) to make the video more or less visible behind text.
+       Since body is --blue-light, a lower opacity tints the video blue. */
+    opacity: 0.35; 
+}
+
+#bgOutroVideo {
+    width: 100%; height: 100%;
     object-fit: cover;
+    filter: saturate(0.8) brightness(1.1); /* Tweaks video colors to blend better */
 }
 
 /* =========================================
-   FIXED BOTTOM-CENTER COMPASS
+   3. FIXED COMPASS UI
    ========================================= */
 .compass-wrapper {
     position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    width: 45vw;
-    max-width: 520px;
-    min-width: 300px;
+    bottom: -50px; left: 50%;
+    transform: translate(-50%, 50%); /* Pushes exactly half of it off the bottom of the screen */
+    width: 100vw; /* Scales relative to viewport width */
+    max-width: 520px; /* Won't get bigger than this on desktop */
+    min-width: 280px; /* Won't get smaller than this on mobile */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-    z-index: 10;
+    align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease, transform 0.5s ease;
+    z-index: 10; /* Sits above narrative text */
     pointer-events: none;
 }
 
 .main-compass {
-    width: 100%;
-    height: auto;
+    width: 100%; height: auto;
     filter: drop-shadow(0 0 20px rgba(46, 92, 149, 0.4));
-    will-change: transform;
+    will-change: transform; /* Optimizes rotation performance */
 }
 
 /* =========================================
-   INTRO SECTION
+   4. FULL-SCREEN SECTIONS (Intro & Outro)
    ========================================= */
-.intro-section {
+.intro-section, .outro-section {
     position: relative;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2;
+    width: 100vw; height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; justify-content: center;
 }
+
+.intro-section { z-index: 2; }
+.outro-section { z-index: 12; background-color: #000; } /* Sits above everything at the very end */
 
 .video-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: 1;
     overflow: hidden;
 }
 
-#introVideo {
-    width: 100%;
-    height: 100%;
+#introVideo, #outroVideo {
+    width: 100%; height: 100%;
     object-fit: cover; 
-    filter: brightness(0.7); 
+    filter: brightness(0.85); /* Darkens video slightly so text/UI stands out */
 }
 
+/* Scrolling Arrow Indicator */
 .ui-layer {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2; pointer-events: none;
 }
-
 .scroll-arrow {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
+    bottom: 30px; right: 30px;
     z-index: 11;
     animation: tiltBounce 2s infinite ease-in-out;
     filter: drop-shadow(0 2px 6px rgba(46, 92, 149, 0.3));
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
-
 @keyframes tiltBounce {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(12px) rotate(8deg); }
 }
 
 /* =========================================
-   BROCHURE NARRATIVE SECTION
+   5. NARRATIVE CONTENT STYLES
    ========================================= */
 .narrative-section {
     position: relative;
     min-height: 200vh;
     z-index: 3;
     padding: 100px 20px 250px 20px;
-    max-width: 1000px;
+    max-width: 1000px; /* Keeps text readable on ultra-wide screens */
     margin: 0 auto;
 }
 
-.brochure-header {
-    text-align: center;
-    margin-bottom: 80px;
-}
+/* Typography */
+.brochure-header { text-align: center; margin-bottom: 80px; }
+.main-title { font-size: 2.8rem; color: var(--blue-dark); margin-bottom: 15px; text-shadow: 0 2px 10px rgba(241, 238, 153, 0.8); }
+.main-subtitle { font-size: 1.3rem; color: var(--orange-accent); font-weight: 600; }
 
-.main-title {
-    font-size: 2.8rem;
-    color: var(--blue-dark);
-    margin-bottom: 15px;
-    text-shadow: 0 2px 10px rgba(241, 238, 153, 0.8);
-}
-
-.main-subtitle {
-    font-size: 1.3rem;
-    color: var(--orange-accent);
-    font-weight: 600;
-}
-
+/* Blocks */
 .brochure-block {
     margin-bottom: 60px;
-    opacity: 0;
+    opacity: 0; /* Hidden initially for GSAP scroll reveal */
     transform: translateY(40px);
 }
+.brochure-block h2 { font-size: 2rem; color: var(--blue-dark); margin-bottom: 25px; text-align: center; }
 
-.brochure-block h2 {
-    font-size: 2rem;
-    color: var(--blue-dark);
-    margin-bottom: 25px;
-    text-align: center;
-}
-
+/* Glassmorphism Text Cards */
 .content-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.85); /* Frost glass transparency */
     padding: 40px;
     border-radius: 20px;
     border: 2px solid var(--blue-light);
     box-shadow: 0 10px 30px rgba(46, 92, 149, 0.1);
     backdrop-filter: blur(10px);
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.1rem; line-height: 1.6;
 }
 
-/* Enfoques Grid */
-.grid-enfoques {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+/* Grid Layouts */
+.grid-enfoques { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.enfoque-item { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid var(--orange-accent); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.enfoque-item h3 { color: var(--blue-dark); font-size: 1.2rem; margin-top: 0; }
+
+.ports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
+.port-card { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 12px; text-align: center; border-bottom: 4px solid var(--yellow-warm); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.highlight-port { border-bottom-color: var(--orange-accent); background: rgba(235, 196, 71, 0.2); }
+.port-num { display: block; font-size: 0.85rem; font-weight: bold; color: var(--orange-accent); text-transform: uppercase; margin-bottom: 5px; }
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .main-title { font-size: 1.8rem; }
+    .main-subtitle { font-size: 1rem; }
+    .content-card { padding: 20px; font-size: 1rem; }
+    .compass-wrapper { width: 75vw; }
 }
 
-.enfoque-item {
+/* =========================================
+   6. FLOATING AUDIO BUTTON
+   ========================================= */
+.audio-toggle-btn {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 50; /* Keeps it above everything */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid var(--blue-light);
+    color: var(--blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(46, 92, 149, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.audio-toggle-btn:hover {
+    transform: scale(1.1);
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    border-top: 5px solid var(--orange-accent);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.enfoque-item h3 {
-    color: var(--blue-dark);
-    font-size: 1.2rem;
-    margin-top: 0;
-}
-
-/* Ports Section */
-.route-intro {
-    text-align: center;
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-}
-
-.ports-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 15px;
-}
-
-.port-card {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    border-bottom: 4px solid var(--yellow-warm);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.highlight-port {
-    border-bottom-color: var(--orange-accent);
-    background: rgba(235, 196, 71, 0.2);
-}
-
-.port-num {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: var(--orange-accent);
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-
-.port-card h3 {
-    margin: 5px 0 10px 0;
-    color: var(--blue-dark);
-}
-
-/* Credits Section */
-.author-info {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px dashed var(--blue-light);
-}
-
-.stimulus-note {
-    font-style: italic;
-    color: var(--orange-accent);
-    font-weight: 500;
-    margin-top: 10px;
+/* Ensure the SVG icons sit perfectly inside the button */
+.audio-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: opacity 0.3s ease;
 }
