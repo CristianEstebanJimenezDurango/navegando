@@ -75,7 +75,7 @@ html, body {
    ========================================= */
 .compass-wrapper {
     position: fixed;
-    bottom: -200px; left: 50%;
+    bottom: -100px; left: 50%;
     transform: translate(-50%, 50%); 
     width: 100vw; 
     max-width: 520px; 
@@ -238,6 +238,8 @@ html, body {
     .content-card { padding: 20px; font-size: 1rem; }
     .compass-wrapper { width: 75vw; }
     .header-image-container { width: 100px; height: 100px; margin-bottom: 15px; }
+    .brochure-block h2 { font-size: 2rem; }
+    .enfoque-item h3 { font-size: 1.5rem; }
 }
 
 /* =========================================
@@ -282,7 +284,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center; /* Pushes the title left and the image to the far right */
-    gap: 150px;
+    gap: 75px;
     margin-bottom: 25px;
     text-align: center;
     width: 100%;
@@ -426,17 +428,42 @@ html, body {
 
 .final-image-container {
     width: 100%;
-    max-width: 600px; /* Controls how "very big" the image can get on desktop */
+    max-width: 600px; 
     margin-bottom: 25px;
     display: flex;
     justify-content: center;
+    animation: floatSymbol 4s ease-in-out infinite alternate;
 }
 
+@keyframes floatSymbol {
+    0% { 
+        transform: translateY(0px); 
+    }
+    100% { 
+        transform: translateY(-20px); /* Moves up 20px */
+    }
+}
+
+/* 2. Slowly cycles the colors of the image */
 .final-big-img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 8px 25px rgba(46, 92, 149, 0.35));
+    /* Combines the drop-shadow with a continuous 10-second color shift */
+    animation: colorShift 10s linear infinite;
+}
+
+@keyframes colorShift {
+    0% {
+        filter: drop-shadow(0 8px 25px rgba(46, 92, 149, 0.35)) hue-rotate(0deg);
+    }
+    50% {
+        /* A subtle color shift. Change 60deg to 360deg if you want a full rainbow cycle */
+        filter: drop-shadow(0 8px 25px rgba(46, 92, 149, 0.35)) hue-rotate(60deg);
+    }
+    100% {
+        filter: drop-shadow(0 8px 25px rgba(46, 92, 149, 0.35)) hue-rotate(0deg);
+    }
 }
 
 .final-text-content {
@@ -486,7 +513,7 @@ html, body {
     /* Keeps main title at the very top */
     .main-title { 
         order: 0; 
-        font-size: 4rem;
+        font-size: 3rem;
         padding: 20px 20px; 
     }
 
@@ -499,4 +526,151 @@ html, body {
 
     .content-card { padding: 20px; font-size: 1rem; }
     .compass-wrapper { width: 75vw; }
+}
+
+/* =========================================
+   PORTS PNG GRAPHIC STYLES
+   ========================================= */
+.ports-graphic-container {
+    width: 100%;
+    max-width: 850px; /* Controls the maximum size on desktop */
+    margin: 10px auto 35px auto; /* Centers it and creates space before the grid */
+    display: flex;
+    justify-content: center;
+}
+
+.ports-graphic-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 18px rgba(46, 92, 149, 0.22));
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 768px) {
+    .ports-graphic-container {
+        max-width: 92vw;
+        margin-bottom: 25px;
+    }
+}
+
+/* =========================================
+   ROUTE GRAPHIC REVEAL ANIMATION
+   ========================================= */
+.route-graphic-container {
+    width: 100%;
+    max-width: 700px; /* Adjust size of the graphic on desktop */
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.route-reveal-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(46, 92, 149, 0.25));
+    /* Applies the left-to-right wiping reveal loop */
+    animation: wipeLeftToRight 6s ease-in-out infinite alternate;
+}
+
+@keyframes wipeLeftToRight {
+    0% {
+        clip-path: inset(0 100% 0 0); /* Hides the image completely, starting from the left edge */
+        opacity: 0.2;
+    }
+    100% {
+        clip-path: inset(0 0% 0 0);   /* Fully reveals the image towards the right */
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 768px) {
+    .route-graphic-container {
+        max-width: 90vw;
+    }
+}
+
+/* =========================================
+   DOWNLOAD BUTTON STYLES
+   ========================================= */
+.download-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.download-btn {
+    display: inline-block;
+    background-color: var(--blue-dark, #2e5c95);
+    color: #ffffff;
+    font-family: 'Bebas Neue', 'Segoe UI', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(46, 92, 149, 0.3);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.download-btn:hover {
+    background-color: transparent;
+    color: var(--blue-dark, #2e5c95);
+    border-color: var(--blue-dark, #2e5c95);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 92, 149, 0.4);
+}
+
+/* =========================================
+   CREDITS SECTION STYLES
+   ========================================= */
+.credits-card {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.credits-card h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Uses CSS Grid for automatic responsive columns */
+.credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.credit-item {
+    padding: 10px;
+}
+
+.credit-item h4 {
+    font-family: 'Bebas Neue', 'Segoe UI', sans-serif;
+    font-size: 1.5rem;
+    color: var(--blue-dark, #2e5c95);
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+}
+
+.credit-item p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: #333; /* Adjust if you have a specific text-color variable */
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 768px) {
+    .credits-grid {
+        gap: 20px;
+    }
+    
+    .credit-item h4 {
+        font-size: 1.3rem;
+    }
 }
