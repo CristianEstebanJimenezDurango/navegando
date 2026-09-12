@@ -21,12 +21,55 @@
 }
 
 /* =========================================
+   CUSTOM FONT REGISTRATION (Atkinson)
+   ========================================= */
+@font-face {
+    font-family: 'Atkinson';
+    /* Make sure this path exactly matches your downloaded file name */
+    src: url('./fonts/Atkinson-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Optional: If you also downloaded the bold version for strong text */
+@font-face {
+    font-family: 'Atkinson';
+    src: url('./fonts/Atkinson-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================================
    APPLY THE FONT
    ========================================= */
 /* Example: Apply it to all your main titles or headers */
 .main-title, h1, h2 {
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1.5px; /* Bebas Neue looks great with a bit of letter spacing */
+}
+
+/* =========================================
+   APPLY ATKINSON FONT TO PARAGRAPHS
+   ========================================= */
+h3,
+p, 
+.main-subtitle, 
+.port-card p, 
+.credit-item p,
+.author-info {
+    font-family: 'Atkinson', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.15rem; /* Atkinson looks great with a slightly larger base size */
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+/* Ensures bold text within paragraphs uses the correct font weight */
+p strong, 
+.author-info strong {
+    font-family: 'Atkinson', sans-serif;
+    font-weight: 700;
 }
 html, body {
     margin: 0;
@@ -233,8 +276,6 @@ html, body {
         flex-direction: column-reverse;
         text-align: center;
     }
-    .main-title { font-size: 5rem; }
-    .main-subtitle { font-size: 2.5rem; }
     .content-card { padding: 20px; font-size: 1rem; }
     .compass-wrapper { width: 75vw; }
     .header-image-container { width: 100px; height: 100px; margin-bottom: 15px; }
@@ -513,7 +554,7 @@ html, body {
     /* Keeps main title at the very top */
     .main-title { 
         order: 0; 
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding: 20px 20px; 
     }
 
