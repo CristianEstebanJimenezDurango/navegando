@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navegando al Son de la Neurodiversidad</title>
-  <script type="module" crossorigin src="/assets/index-bmFwExW9.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-C1cNyJTa.css">
+  <script type="module" crossorigin src="/assets/index-DioF5azI.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BYRIP5TW.css">
 </head>
 <body>
 
@@ -79,21 +79,39 @@
         </header> 
 
 
+<section class="brochure-block">
+    <div class="content-card">
+        <h2>Una oportunidad para la creación</h2>
+        <p>Este recurso didáctico integral, está diseñado para transformar la formación en música y artes integradas con personas con discapacidad y/o trastornos, ampliando las posibilidades de acceso, participación y creación.</p>
+        <p>Es una herramienta que contribuye a transformar barreras, prejuicios y miedos en el aula, favoreciendo el ejercicio de los derechos culturales mediante ajustes razonables, y múltiples maneras de comunicación y expresión, como la Lengua de Señas Colombiana (LSC), el uso de pictogramas, y la creación de canciones, cuentos y vídeos.</p>
+        
+        <!-- AUDIO ELEMENT (Replace src with your actual audio file path) -->
+        <audio id="accessibleAudio" preload="metadata">
+            <source src="./audio/Mar.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
 
-        <section class="brochure-block">
-            <div class="content-card">
-                <h2>Una oportunidad para la creación</h2>
-                <p>Este recurso didáctico integral, está diseñado para transformar la formación en música y artes integradas con personas con discapacidad y/o trastornos, ampliando las posibilidades de acceso, participación y creación.</p>
-                <p>Es una herramienta que contribuye a transformar barreras, prejuicios y miedos en el aula, favoreciendo el ejercicio de los derechos culturales mediante ajustes razonables, y múltiples maneras de comunicación y expresión, como la Lengua de Señas Colombiana (LSC), el uso de pictogramas, y la creación de canciones, cuentos y vídeos.</p>
-                
-                <!-- Download Button -->
-                <div class="download-btn-container">
-                    <a href="./Download/Brochure.pdf" class="download-btn" download>
-                        Descargar Cartilla 
-                    </a>
-                </div>
-            </div>
-        </section>
+        <!-- ACCESSIBLE AUDIO BUTTON & DOWNLOAD CONTAINER -->
+        <div class="card-actions-container">
+            <!-- Audio Description Button -->
+            <button id="accessibleAudioBtn" class="accessible-audio-btn" aria-label="Escuchar Descripción accesible de la cartilla" aria-pressed="false">
+                <svg id="descIconPlay" class="audio-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg id="descIconPause" class="audio-btn-icon hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+                <span id="descBtnLabel">Escuchar descripción accesible</span>
+            </button>
+
+            <!-- Download Button -->
+            <a href="./Download/Brochure.pdf" class="download-btn" download target="_blank" rel="noopener noreferrer">
+                Descargar Cartilla 
+            </a>
+        </div>
+    </div>
+</section>
 
         <section class="brochure-block">
             <h2>Enfoques:</h2>
@@ -216,6 +234,29 @@
             </div>
         </section>
 
+        <!-- FINAL BIG IMAGE SECTION -->
+        <section class="brochure-block final-image-section">
+            <div class="final-image-container">
+                <!-- Replace with your final image path -->
+                <img src="/images/Simbolo.svg" alt="Imagen Final" class="final-big-img">
+            </div>
+            <div class="final-text-content">
+                <p>Esta cartilla convierte las experiencias de una
+                  artista formadora con personas con
+                  discapacidad y/o trastornos, en un modelo
+                  transferible para inspirar a otros seres humanos
+                  a sentir, fluir y gozar a través de la música.</p>
+
+                  <div class="download-btn-container">
+                    <a href="./Download/Brochure.pdf" class="download-btn" download>
+                        Descargar Cartilla 
+                    </a>
+                </div>
+            </div>
+
+            
+        </section>
+
         <!-- TESOROS SECTION -->
         <section class="brochure-block treasures-section">
             <div class="content-card">
@@ -275,25 +316,12 @@
                         </div>
                         <h3>Título del segundo video</h3>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
 
-        <!-- FINAL BIG IMAGE SECTION -->
-        <section class="brochure-block final-image-section">
-            <div class="final-image-container">
-                <!-- Replace with your final image path -->
-                <img src="/images/Simbolo.svg" alt="Imagen Final" class="final-big-img">
-            </div>
-            <div class="final-text-content">
-                <p>Esta cartilla convierte las experiencias de una
-                  artista formadora con personas con
-                  discapacidad y/o trastornos, en un modelo
-                  transferible para inspirar a otros seres humanos
-                  a sentir, fluir y gozar a través de la música.</p>
-            </div>
-        </section>
+        
         <!-- CREDITS SECTION -->
         <section class="brochure-block credits-section">
             <div class="content-card credits-card">
