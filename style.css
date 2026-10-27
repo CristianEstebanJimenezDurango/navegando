@@ -555,6 +555,10 @@ html, body {
     .main-title { 
         order: 0; 
         font-size: 2.5rem;
+        margin-bottom: 10px;
+        margin-top: 0;
+        margin-left: 10px;
+        margin-right: 10px;
         padding: 20px 20px; 
     }
 
@@ -714,4 +718,245 @@ html, body {
     .credit-item h4 {
         font-size: 1.3rem;
     }
+}
+
+/* =========================================
+   TESOROS SECTION (YouTube Embeds)
+   ========================================= */
+.treasures-grid {
+    display: grid;
+    /* Automatically creates columns that fit the screen, minimum 275px wide */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.treasure-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.treasure-item h3 {
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    color: var(--blue-dark, #2e5c95);
+}
+
+/* 16:9 Aspect Ratio Container for responsive iframes */
+.video-responsive {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(46, 92, 149, 0.2);
+}
+
+.video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* =========================================
+   PORT COLORS & COMBINED FLOAT + HUE ANIMATION
+   ========================================= */
+
+/* Color variables per port */
+.port-card:nth-child(1) { --port-color: #fcd77a; }
+.port-card:nth-child(2) { --port-color: #86fbff; }
+.port-card:nth-child(3) { --port-color: #c7df73; }
+.port-card:nth-child(4) { --port-color: #fdd7c3; }
+.port-card:nth-child(5) { --port-color: #FFDA9F; }
+
+.port-card:nth-child(1) h3 { color: #fcd77a; }
+.port-card:nth-child(2) h3 { color: #86fbff; }
+.port-card:nth-child(3) h3 { color: #c7df73; }
+.port-card:nth-child(4) h3 { color: #fdd7c3; }
+.port-card:nth-child(5) h3 { color: #FFDA9F; }
+
+/* Combined Floating & Soft Hue-Shift Animation */
+@keyframes floatAndHue {
+    0% {
+        transform: translateY(0px);
+        filter: hue-rotate(0deg) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+    }
+    100% {
+        transform: translateY(-8px);
+        filter: hue-rotate(35deg) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+    }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE CIRCULAR BUTTONS (< 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    .ports-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 25px;
+    }
+
+    /* Smaller circular buttons (50px x 50px) */
+    .port-card {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--port-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        box-sizing: border-box;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        transition: transform 0.2s ease;
+        
+        /* Applies floating + hue animation */
+        animation: floatAndHue 4s ease-in-out infinite alternate;
+    }
+
+    /* Asynchronous animation delays for organic motion */
+    .port-card:nth-child(1) { animation-delay: 0s; }
+    .port-card:nth-child(2) { animation-delay: 0.8s; }
+    .port-card:nth-child(3) { animation-delay: 1.6s; }
+    .port-card:nth-child(4) { animation-delay: 2.4s; }
+    .port-card:nth-child(5) { animation-delay: 3.2s; }
+
+    .port-card:active {
+        transform: scale(0.9);
+    }
+
+    /* Hide standard titles and text inside circle */
+    .port-card h3,
+    .port-card p {
+        display: none !important;
+    }
+
+    /* Hide original text ("Puerto I") on circle button */
+    .port-card .port-num {
+        font-size: 0;
+        margin: 0;
+        line-height: 1;
+    }
+
+    /* Display ONLY Roman numerals centered in the circle */
+    .port-card:nth-child(1) .port-num::after { content: "I"; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #ffffff; }
+    .port-card:nth-child(2) .port-num::after { content: "II"; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #ffffff; }
+    .port-card:nth-child(3) .port-num::after { content: "III"; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #ffffff; }
+    .port-card:nth-child(4) .port-num::after { content: "IV"; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #ffffff; }
+    .port-card:nth-child(5) .port-num::after { content: "V"; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #ffffff; }
+}
+
+/* Adjust Modal Content so original text displays correctly in popup */
+#portModalBody .port-num {
+    font-size: 1rem !important;
+    font-weight: bold;
+    color: var(--blue-dark, #2e5c95);
+    display: block;
+    margin-bottom: 5px;
+}
+
+#portModalBody .port-num::after {
+    content: none !important; /* Hides duplicate Roman numeral inside the modal popup */
+}
+
+/* =========================================
+   PORT MODAL POPUP STYLES
+   ========================================= */
+.port-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999; /* Higher z-index to sit above background videos/canvas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.port-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.port-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+}
+
+.port-modal-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(15px);
+    width: 85%;
+    max-width: 380px;
+    padding: 30px 25px;
+    border-radius: 20px;
+    border: 2px solid var(--blue-light, #92b4d8);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: scale(0.85);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.port-modal.active .port-modal-content {
+    transform: scale(1);
+}
+
+.port-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: var(--blue-dark, #2e5c95);
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Modal Internal Typography */
+.modal-port-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--blue-dark, #2e5c95);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.modal-port-title {
+    font-family: 'Atkinson', 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    margin: 4px 0 12px 0;
+}
+
+.modal-port-desc {
+    font-family: 'Atkinson', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #333333;
+    margin: 0;
 }

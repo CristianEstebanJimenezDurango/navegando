@@ -229,3 +229,69 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('click', startAudioOnInteract, { once: true });
     document.addEventListener('touchstart', startAudioOnInteract, { once: true });
     document.addEventListener('scroll', startAudioOnInteract, { once: true });
+
+ /* =========================================
+   PORT CARD POPUP LOGIC (FAIL-SAFE)
+   ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const portCards = document.querySelectorAll('.port-card');
+    const portModal = document.getElementById('portModal');
+    const portModalOverlay = document.getElementById('portModalOverlay');
+    const portModalClose = document.getElementById('portModalClose');
+    const portModalBody = document.getElementById('portModalBody');
+
+    // Return early if modal container is missing in HTML
+    if (!portModal || !portModalBody) {
+        console.warn('Port Modal elements not found in HTML.');
+        return;
+    }
+
+    function openPortModal(card, index) {
+        // Fallback roman numerals array
+        const romans = ['Puerto I', 'Puerto II', 'Puerto III', 'Puerto IV', 'Puerto V'];
+        
+        // Extract content
+        const numText = card.querySelector('.port-num')?.textContent.trim() || romans[index] || `Puerto ${index + 1}`;
+        const h3Text = card.querySelector('h3')?.textContent.trim() || '';
+        const pText = card.querySelector('p')?.textContent.trim() || card.getAttribute('data-desc') || '';
+
+        // Inject cleaned content into modal
+        portModalBody.innerHTML = `
+            <span class="modal-port-num">${numText}</span>
+            <h3 class="modal-port-title">${h3Text}</h3>
+            <p class="modal-port-desc">${pText}</p>
+        `;
+
+        // Apply port color to title in popup
+        const portColor = getComputedStyle(card).getPropertyValue('--port-color') || '#2e5c95';
+        const modalTitle = portModalBody.querySelector('.modal-port-title');
+        if (modalTitle) modalTitle.style.color = portColor.trim();
+
+        portModal.classList.add('active');
+    }
+
+    function closePortModal() {
+        portModal.classList.remove('active');
+    }
+
+    // Attach click event to each card
+    portCards.forEach((card, index) => {
+        // Store description before CSS hides it on mobile
+        const pEl = card.querySelector('p');
+        if (pEl && !card.getAttribute('data-desc')) {
+            card.setAttribute('data-desc', pEl.textContent);
+        }
+
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Opens modal on mobile screens (or all screens if resizing window)
+            if (window.innerWidth <= 768) {
+                openPortModal(card, index);
+            }
+        });
+    });
+
+    // Close listeners
+    if (portModalClose) portModalClose.addEventListener('click', closePortModal);
+    if (portModalOverlay) portModalOverlay.addEventListener('click', closePortModal);
+});
