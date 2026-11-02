@@ -170,13 +170,83 @@ html, body {
     width: 100%; height: 100%;
     z-index: 2; pointer-events: none;
 }
+
+
+/* Styling for Image File Option */
+.scroll-arrow-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    /* Optional: recolor black PNG to match your dark blue (#2e5c95) */
+    filter: invert(30%) sepia(50%) saturate(1000%) hue-rotate(185deg) drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+@media (max-width: 768px) {
+    .scroll-arrow-img {
+        width: 50px;
+        height: 50px;
+    }
+}
+/* =========================================
+   SCROLL ARROW STYLES (ENLARGED & ALWAYS VISIBLE)
+   ========================================= */
 .scroll-arrow {
-    position: absolute;
-    bottom: 30px; right: 30px;
-    z-index: 11;
-    animation: tiltBounce 2s infinite ease-in-out;
-    filter: drop-shadow(0 2px 6px rgba(46, 92, 149, 0.3));
+    opacity: 1;
+    visibility: visible;
     transition: opacity 0.8s ease, visibility 0.8s ease;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Continuous bouncing animation */
+    animation: bounceArrow 2s infinite;
+}
+
+.scroll-arrow.hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+}
+
+/* Scaling the SVG arrow up */
+.scroll-arrow svg {
+    width: 60px;  /* Increased desktop size from 44px */
+    height: 60px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+@keyframes bounceArrow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -12px);
+    }
+    60% {
+        transform: translate(-50%, -6px);
+    }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE ADJUSTMENTS (< 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    .scroll-arrow {
+        bottom: 20px; /* Position slightly closer to the bottom on mobile */
+        display: flex !important; /* Forces visibility even if hidden utility classes are applied */
+    }
+
+    .scroll-arrow svg {
+        width: 50px; /* Sized comfortably for mobile screens */
+        height: 50px;
+    }
 }
 @keyframes tiltBounce {
     0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -286,36 +356,62 @@ html, body {
 /* =========================================
    6. FLOATING AUDIO BUTTON
    ========================================= */
+/* =========================================
+   AMBIENT AUDIO BUTTON WITH CUSTOM IMAGE ICON
+   ========================================= */
+/* =========================================
+   AMBIENT AUDIO BUTTON (TOP RIGHT POSITIONING)
+   ========================================= */
 .audio-toggle-btn {
     position: fixed;
-    top: 30px;
+    top: 30px;            /* Changed from bottom to top */
     right: 30px;
-    z-index: 50; 
-    width: 50px;
-    height: 50px;
+    z-index: 1000;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid var(--blue-light);
-    color: var(--blue-dark);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--blue-light, #92b4d8);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(46, 92, 149, 0.2);
-    backdrop-filter: blur(10px);
-    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .audio-toggle-btn:hover {
-    transform: scale(1.1);
-    background: white;
+    transform: scale(1.08);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
-.audio-toggle-btn svg {
-    width: 20px;
-    height: 20px;
-    position: absolute;
+.audio-icon-img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    filter: invert(30%) sepia(50%) saturate(1000%) hue-rotate(185deg) drop-shadow(0 2px 5px rgba(46, 92, 149, 0.2));
     transition: opacity 0.3s ease;
+}
+
+.audio-icon-img.hidden,
+.audio-toggle-btn svg.hidden {
+    display: none !important;
+}
+
+/* Responsive top-right positioning for mobile */
+@media (max-width: 768px) {
+    .audio-toggle-btn {
+        width: 55px;
+        height: 55px;
+        top: 20px;       /* Adjusted for mobile headers/notches */
+        right: 20px;
+    }
+
+    .audio-icon-img {
+        width: 34px;
+        height: 34px;
+    }
 }
 
 /* =========================================
@@ -776,11 +872,11 @@ html, body {
 .port-card:nth-child(4) { --port-color: #fdd7c3; }
 .port-card:nth-child(5) { --port-color: #FFDA9F; }
 
-.port-card:nth-child(1) h3 { color: #fcd77a; }
-.port-card:nth-child(2) h3 { color: #86fbff; }
-.port-card:nth-child(3) h3 { color: #c7df73; }
-.port-card:nth-child(4) h3 { color: #fdd7c3; }
-.port-card:nth-child(5) h3 { color: #FFDA9F; }
+.port-card:nth-child(1) h3 { color: #d37e3d; }
+.port-card:nth-child(2) h3 { color: #d37e3d; }
+.port-card:nth-child(3) h3 { color: #d37e3d; }
+.port-card:nth-child(4) h3 { color: #d37e3d; }
+.port-card:nth-child(5) h3 { color: #d37e3d; }
 
 /* Combined Floating & Soft Hue-Shift Animation */
 @keyframes floatAndHue {
@@ -959,4 +1055,108 @@ html, body {
     line-height: 1.5;
     color: #333333;
     margin: 0;
+}
+
+/* =========================================
+   ACCESSIBLE AUDIO BUTTON STYLES
+   ========================================= */
+.card-actions-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* =========================================
+   ACCESSIBLE AUDIO BUTTON (MATCHED TO DOWNLOAD BTN)
+   ========================================= */
+/* Base Shared Styles for Audio & Download Buttons */
+.accessible-audio-btn,
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    background-color: var(--blue-dark, #2e5c95);
+    color: #ffffff;
+    font-family: 'Bebas Neue', 'Segoe UI', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(46, 92, 149, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.accessible-audio-btn:hover,
+.download-btn:hover {
+    background-color: transparent;
+    color: var(--blue-dark, #2e5c95);
+    border-color: var(--blue-dark, #2e5c95);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 92, 149, 0.4);
+}
+
+.accessible-audio-btn:focus-visible,
+.download-btn:focus-visible {
+    outline: 3px solid #f0ad4e;
+    outline-offset: 3px;
+}
+
+/* Active playing animation state */
+.accessible-audio-btn.is-playing {
+    background-color: var(--blue-dark, #2e5c95);
+    color: #ffffff;
+    border-color: transparent;
+    animation: pulseAudio 2s infinite alternate;
+}
+
+.audio-btn-icon {
+    flex-shrink: 0;
+}
+
+.audio-btn-icon.hidden {
+    display: none !important;
+}
+
+@keyframes pulseAudio {
+    0% { box-shadow: 0 0 0 0 rgba(46, 92, 149, 0.4); }
+    100% { box-shadow: 0 0 0 10px rgba(46, 92, 149, 0); }
+}
+
+/* =========================================
+   RESPONSIVE ADJUSTMENTS (< 768px & < 400px)
+   ========================================= */
+@media (max-width: 768px) {
+    .card-actions-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .accessible-audio-btn,
+    .download-btn {
+        font-size: 1.15rem; /* Reduces text size for mobile */
+        padding: 10px 22px; /* Compact padding */
+        width: 100%;
+        max-width: 310px; /* Centered fixed width for stacked view */
+    }
+}
+
+@media (max-width: 400px) {
+    .accessible-audio-btn,
+    .download-btn {
+        font-size: 1.05rem; /* Extra scaling for small devices */
+        padding: 9px 18px;
+        max-width: 280px;
+    }
 }

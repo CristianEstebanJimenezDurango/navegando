@@ -23,15 +23,15 @@
     </div>
 
     <!-- LAYER 2.5: AUDIO PLAYER -->
+    <!-- LAYER 2.5: AUDIO PLAYER -->
     <audio id="ambientAudio" loop>
         <source src="./audio/Mar.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="audioToggle" class="audio-toggle-btn">
-        <!-- Play Icon -->
-        <svg id="iconPlay" width="100px" height="100px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
+    <button id="audioToggle" class="audio-toggle-btn" aria-label="Reproducir / Pausar sonido ambiental">
+        <!-- New Musical Waves Image Icon for Play -->
+        <img id="iconPlay" src="/images/music.png" alt="Play Música" class="audio-icon-img">
+
         <!-- Pause Icon -->
         <svg id="iconPause" class="hidden" width="100px" height="100px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="6" y="4" width="4" height="16"></rect>
@@ -47,14 +47,13 @@
                 Tu navegador no soporta videos HTML5.
             </video>
         </div>
-        <div class="ui-layer">
-            <div id="scrollArrow" class="scroll-arrow hidden">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2e5c95" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <polyline points="19 12 12 19 5 12"></polyline>
-                </svg>
-            </div>
-        </div>
+    <div class="ui-layer">
+    <div id="scrollArrow" class="scroll-arrow hidden">
+        <img src="/images/arrow.png" alt="Flecha hacia abajo" class="scroll-arrow-img">
+    </div>
+</div>
+        
+</div>
     </section>
 
     <main id="narrative" class="narrative-section">
@@ -78,21 +77,39 @@
         </header> 
 
 
+<section class="brochure-block">
+    <div class="content-card">
+        <h2>Una oportunidad para la creación</h2>
+        <p>Este recurso didáctico integral, está diseñado para transformar la formación en música y artes integradas con personas con discapacidad y/o trastornos, ampliando las posibilidades de acceso, participación y creación.</p>
+        <p>Es una herramienta que contribuye a transformar barreras, prejuicios y miedos en el aula, favoreciendo el ejercicio de los derechos culturales mediante ajustes razonables, y múltiples maneras de comunicación y expresión, como la Lengua de Señas Colombiana (LSC), el uso de pictogramas, y la creación de canciones, cuentos y vídeos.</p>
+        
+        <!-- AUDIO ELEMENT (Replace src with your actual audio file path) -->
+        <audio id="accessibleAudio" preload="metadata">
+            <source src="./audio/Mar.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
 
-        <section class="brochure-block">
-            <div class="content-card">
-                <h2>Una oportunidad para la creación</h2>
-                <p>Este recurso didáctico integral, está diseñado para transformar la formación en música y artes integradas con personas con discapacidad y/o trastornos, ampliando las posibilidades de acceso, participación y creación.</p>
-                <p>Es una herramienta que contribuye a transformar barreras, prejuicios y miedos en el aula, favoreciendo el ejercicio de los derechos culturales mediante ajustes razonables, y múltiples maneras de comunicación y expresión, como la Lengua de Señas Colombiana (LSC), el uso de pictogramas, y la creación de canciones, cuentos y vídeos.</p>
-                
-                <!-- Download Button -->
-                <div class="download-btn-container">
-                    <a href="./Download/Brochure.pdf" class="download-btn" download>
-                        Descargar Cartilla 
-                    </a>
-                </div>
-            </div>
-        </section>
+        <!-- ACCESSIBLE AUDIO BUTTON & DOWNLOAD CONTAINER -->
+        <div class="card-actions-container">
+            <!-- Audio Description Button -->
+            <button id="accessibleAudioBtn" class="accessible-audio-btn" aria-label="Escuchar Descripción accesible de la cartilla" aria-pressed="false">
+                <svg id="descIconPlay" class="audio-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg id="descIconPause" class="audio-btn-icon hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+                <span id="descBtnLabel">Escuchar presentación</span>
+            </button>
+
+            <!-- Download Button -->
+            <a href="./Download/Brochure.pdf" class="download-btn" download target="_blank" rel="noopener noreferrer">
+                Descargar Presentación 
+            </a>
+        </div>
+    </div>
+</section>
 
         <section class="brochure-block">
             <h2>Enfoques:</h2>
@@ -215,70 +232,6 @@
             </div>
         </section>
 
-        <!-- TESOROS SECTION -->
-        <section class="brochure-block treasures-section">
-            <div class="content-card">
-                <h2>Tesoros</h2>
-                <p>Explora las creaciones y experiencias audiovisuales de nuestra travesía.</p>
-                
-                <div class="treasures-grid">
-                    <!-- Video Item 1 -->
-                    <div class="treasure-item">
-                        <div class="video-responsive">
-                            <!-- Replace 'VIDEO_ID_1' with your actual YouTube video ID -->
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Título del primer video</h3>
-                    </div>
-
-                    <!-- Video Item 2 -->
-                    <div class="treasure-item">
-                        <div class="video-responsive">
-                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Título del segundo video</h3>
-                    </div>
-                    
-                    <!-- Video Item 2 -->
-                    <div class="treasure-item">
-                        <div class="video-responsive">
-                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Título del segundo video</h3>
-                    </div>
-
-                    <!-- Video Item 2 -->
-                    <div class="treasure-item">
-                        <div class="video-responsive">
-                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Título del segundo video</h3>
-                    </div>
-
-                    <!-- Video Item 2 -->
-                    <div class="treasure-item">
-                        <div class="video-responsive">
-                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Título del segundo video</h3>
-                    </div>
-
-                    <div class="treasure-item">
-                        <div class="video-responsive">
-                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Título del segundo video</h3>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
         <!-- FINAL BIG IMAGE SECTION -->
         <section class="brochure-block final-image-section">
             <div class="final-image-container">
@@ -291,8 +244,73 @@
                   discapacidad y/o trastornos, en un modelo
                   transferible para inspirar a otros seres humanos
                   a sentir, fluir y gozar a través de la música.</p>
+
+                  <div class="download-btn-container">
+                    <a href="./Download/Cartilla.pdf" class="download-btn" download>
+                        Descargar Cartilla 
+                    </a>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <!-- TESOROS SECTION -->
+        <section class="brochure-block treasures-section">
+            <div class="content-card">
+                <h2>Tesoros</h2>
+                <p>Explora las creaciones y experiencias audiovisuales de nuestra travesía.</p>
+                
+                <div class="treasures-grid">
+                    <!-- Video Item 1 -->
+                    <div class="treasure-item">
+                        <div class="video-responsive">
+                            <!-- Replace 'VIDEO_ID_1' with your actual YouTube video ID -->
+                            <iframe src="https://www.youtube.com/embed/YhaMQxR8qZU?si=4wKtADQE4WTHXDQr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3>Canción de saludo</h3>
+                    </div>
+
+                    <!-- Video Item 2 -->
+                    <div class="treasure-item">
+                        <div class="video-responsive">
+                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
+                            <iframe src="https://www.youtube.com/embed/XBhstVeU7yI?si=8A62-aeHRqjfFreH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3>El canto de la naturaleza (cuento sonoro)</h3>
+                    </div>
+
+                      <div class="treasure-item">
+                        <div class="video-responsive">
+                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
+                            <iframe src="https://www.youtube.com/embed/76hPUpKc71o?si=vIA59Rv1IgMmHugk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3>Cue Cue</h3>
+                    </div>
+                    
+
+                    <!-- Video Item 2 -->
+                    <div class="treasure-item">
+                        <div class="video-responsive">
+                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
+                            <iframe src="https://www.youtube.com/embed/Poj_qSMMe24?si=-F2Pz-Xvw96fBR7Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3>Canción de las notas musicales (fononimia y gestos Curwen)</h3>
+                    </div>
+
+                    <div class="treasure-item">
+                        <div class="video-responsive">
+                            <!-- Replace 'VIDEO_ID_2' with your actual YouTube video ID -->
+                            <iframe src="https://www.youtube.com/embed/9bQ2ws8BIQE?si=0WbNA23OLZO-oryu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3>Testimonio de la autora: Margarita María Granada Ruíz</h3>
+                    </div>
+
+                </div>
             </div>
         </section>
+
+        
         <!-- CREDITS SECTION -->
         <section class="brochure-block credits-section">
             <div class="content-card credits-card">

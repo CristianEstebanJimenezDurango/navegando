@@ -295,3 +295,86 @@ document.addEventListener('DOMContentLoaded', () => {
     if (portModalClose) portModalClose.addEventListener('click', closePortModal);
     if (portModalOverlay) portModalOverlay.addEventListener('click', closePortModal);
 });
+
+/* =========================================
+   ACCESSIBLE AUDIO DESCRIPTION PLAYER
+   ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const audioEl = document.getElementById('accessibleAudio');
+    const btn = document.getElementById('accessibleAudioBtn');
+    const playIcon = document.getElementById('descIconPlay');
+    const pauseIcon = document.getElementById('descIconPause');
+    const btnLabel = document.getElementById('descBtnLabel');
+    const ambientAudio = document.getElementById('ambientAudio'); // Background sea sound if active
+
+    if (!audioEl || !btn) return;
+
+    function toggleAudio() {
+        if (audioEl.paused) {
+            // Lower ambient sound if it is currently playing
+            if (ambientAudio && !ambientAudio.paused) {
+                ambientAudio.volume = 0.2;
+            }
+
+            audioEl.play().then(() => {
+                btn.classList.add('is-playing');
+                btn.setAttribute('aria-pressed', 'true');
+                btn.setAttribute('aria-label', 'Pausar descripción accesible');
+                if (playIcon) playIcon.classList.add('hidden');
+                if (pauseIcon) pauseIcon.classList.remove('hidden');
+                if (btnLabel) btnLabel.textContent = 'Pausar presentación';
+            }).catch(err => {
+                console.error('Error al reproducir audio:', err);
+            });
+        } else {
+            audioEl.pause();
+            resetAudioUI();
+        }
+    }
+
+    function resetAudioUI() {
+        btn.classList.remove('is-playing');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Escuchar descripción accesible de la cartilla');
+        if (playIcon) playIcon.classList.remove('hidden');
+        if (pauseIcon) pauseIcon.classList.add('hidden');
+        if (btnLabel) btnLabel.textContent = 'Escuchar presentación ';
+
+        // Restore ambient sea volume if present
+        if (ambientAudio) {
+            ambientAudio.volume = 1.0;
+        }
+    }
+
+    btn.addEventListener('click', toggleAudio);
+
+    // Automatically reset when narration finishes
+    audioEl.addEventListener('ended', () => {
+        resetAudioUI();
+    });
+});
+
+/* =========================================
+   SCROLL ARROW REVEAL LOGIC
+   ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const introVideo = document.getElementById('introVideo');
+    const scrollArrow = document.getElementById('scrollArrow');
+
+    if (!introVideo || !scrollArrow) return;
+
+    // Function to reveal the arrow
+    const revealArrow = () => {
+        scrollArrow.classList.remove('hidden');
+    };
+
+    // Trigger 1: Reveal when the intro video finishes playing
+    introVideo.addEventListener('ended', revealArrow);
+
+    // Trigger 2: Reveal if the user starts scrolling before the video ends
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            revealArrow();
+        }
+    }, { once: true }); // { once: true } ensures this event only fires the first time
+});
